@@ -22,7 +22,7 @@ In English, such a thing is usually represented using a numbered list, like the 
 4. Bake for 20 minutes
 
 But what if we want to describe how to make the icing, or what happens if your oven catches
-fire? There's no universally accepted standard for this sort of language, and this is what this spec is designed to
+fire? There's no universally accepted standard for this sort of procedure, and this is what this spec is designed to
 solve.
 
 Describing the above, including those cases, in SBSML would look like this;
@@ -65,13 +65,13 @@ A basic step node;
 
 Step nodes support several annotations. 
 
-You can signal that a step produces a specific output with the *output* annotation `->`
+You can signal that a step produces a specific output with the *output* annotation `>`
 
-`1. Melt some butter -> melted butter`
+`1. Melt some butter > melted butter`
 
 Likewise a step can reference input using the *input* annotation `>>`
 
-`1. Butter >> Melt some butter -> melted butter`
+`1. Butter >> Melt some butter > melted butter`
 
 Steps can also have *substeps* or *nested processes*. This is done by providing an non-numerical character after the 
 step number.
@@ -98,7 +98,7 @@ Like *steps*, a *process* can have both inputs and outputs. These must be declar
 ```
 >> Unmelted butter
 --- Melt some Butter ---
--> Melted Butter
+> Melted Butter
 1. Melt the butter
 ```
 
@@ -121,11 +121,11 @@ current process, or another process.
 
 ### Input/Output
 
-Any node can use *input* `>>` and *output* `->` annotations to describe parameters to a step. Both allow multiples via
+Any node can use *input* `>>` and *output* `>` annotations to describe parameters to a step. Both allow multiples via
 comma seperation of the values, for example, here is a step with two inputs and one output;
 
 ```
-1. butter, microwave >> Melt the butter -> Melted butter
+1. butter, microwave >> Melt the butter > Melted butter
 ```
 
 ### Node References
@@ -162,4 +162,17 @@ A microwave is an electronic cooking tool that can rapidly heat food.
 
 -- Melt the buter -- 
 1. Put the butter in the Microwave
+```
+
+# Description
+
+Each node supports a *description* of any length as a body of text directly after the node it describes.
+
+```
+1. Melt the butter
+Room temperature or slightly melted butter whips easier and improves the texture of the icing.
+
+Don't overmelt it!
+
+2. Transfer butter to plate
 ```
