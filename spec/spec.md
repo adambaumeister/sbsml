@@ -28,24 +28,24 @@ solve.
 Describing the above, including those cases, in SBSML would look like this;
 
 ```
+- How to Bake a Cake -
+
 --- Making the Cake ---
 1. Add the packet mix
 2. Add the milk
 3. Whip the mix
 4. Bake for 20 minutes
-IF: Oven too hot!
-DO: Turn Oven Down
-IF: Oven too cold!
-DO: Turn oven up
+IF: Oven too hot! THEN: Turn Oven Down
+IF: Oven too cold! THEN: Turn Oven up
 THEN: Make the icing 
 
--- Turn Oven Down --
+--- Turn Oven Down ---
 1. Turn the temperature dial anti-clockwise
 
--- Turn oven up --
+--- Turn oven up ---
 1. Turn the temperature dial clockwise
 
--- Make the icing --
+--- Make the icing ---
 1. Add the icing
 2. Melt some butter
 3. Add the butter
@@ -108,14 +108,29 @@ Used to provide logical branching of a process. A *conditional* node is made up 
 declared with `IF:<condition>` and the *next node*, declared with `THEN:` 
 
 ```
-IF: butter not melted
-THEN: Melt the butter
+IF: butter not melted THEN: Melt the butter
 ```
 
-Conditional nodes can follow any *step* node. The *next node* declaration can either be a reference to a step in the 
-current process, or another process. 
+Conditional nodes can follow any *step* node. The *next node* declaration must be another valid process.
 
+Conditionals cannot be interleaved between steps; they must appear at the end of a process and use match-any logic.
 
+*valid*
+```
+--- Process ---
+1. Step
+IF: Condition THEN: something
+THEN: Something else
+```
+
+*invalid*
+```
+--- Process ---
+1. Step
+IF: Condition THEN: something
+2. another step <--- this isn't supported
+```
+U
 
 # Annotations
 
@@ -126,6 +141,12 @@ comma seperation of the values, for example, here is a step with two inputs and 
 
 ```
 1. butter, microwave >> Melt the butter > Melted butter
+```
+
+Input/output annotations can also be named parameters by seperating the paramater name from the value with a colon `:`.
+
+```
+1. food:butter, tool:microwave >> Melt the butter > Melted butter
 ```
 
 ### Node References
