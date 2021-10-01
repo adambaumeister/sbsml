@@ -102,6 +102,15 @@ Like *steps*, a *process* can have both inputs and outputs. These must be declar
 1. Melt the butter
 ```
 
+## Title 
+
+Provides a title for the overall SBSML document.
+
+```
+- This is a Title -
+```
+
+
 ## Conditional
 
 Used to provide logical branching of a process. A *conditional* node is made up of two components; the *condition*,
@@ -120,7 +129,7 @@ Conditionals cannot be interleaved between steps; they must appear at the end of
 --- Process ---
 1. Step
 IF: Condition THEN: something
-THEN: Something else
+then: Something else
 ```
 
 *invalid*
@@ -130,7 +139,6 @@ THEN: Something else
 IF: Condition THEN: something
 2. another step <--- this isn't supported
 ```
-U
 
 # Annotations
 
